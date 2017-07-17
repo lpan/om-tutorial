@@ -6,9 +6,10 @@
 
 (defui Person
   static om/IQuery
-  (query [this] '[:person/name])
+  (query [this] '[:person/name :person/married?])
   Object
-  (render [this] (let [{:keys [person/name]} (om/props this)] (dom/li nil name))))
+  (render [this] (let [{:keys [person/name person/married?]} (om/props this)]
+                   (dom/li nil (str "Name: " name ". is married: " married?)))))
 
 (def person (om/factory Person {:keyfn :db/id}))
 
@@ -20,10 +21,13 @@
 
 (defui Root
   static om/IQuery
+  ; really intersting....
   (query [this] `[{:people ~(om/get-query Person)}])
   Object
   (render [this]
-    (let [{:keys [people]} (om/props this)] (dom/div nil (people-list people)))))
+    (let [{:keys [people]} (om/props this)]
+      (js/console.log (clj->js people))
+      (dom/div nil (people-list people)))))
 
 (def root (om/factory Root))
 

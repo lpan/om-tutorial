@@ -135,9 +135,9 @@
 
 (defcard sample-rendering-with-result-data
   (fn [state _] (qd/root @state))
-  {:people [{:db/id 1 :person/name "Joe"}
-            {:db/id 2 :person/name "Guy"}
-            {:db/id 3 :person/name "Tammy"}]}
+  {:people [{:db/id 1 :person/name "Joe" :person/married? false}
+            {:db/id 2 :person/name "Guy" :person/married? true}
+            {:db/id 3 :person/name "Tammy" :person/married? false}]}
   {:inspect-data true})
 
 (defcard-doc "
